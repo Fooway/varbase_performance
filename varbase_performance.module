@@ -1,0 +1,26 @@
+<?php
+/**
+ * @file
+ * Code for the varbase_performance feature.
+ */
+
+/**
+ * Implements hook_init().
+ */
+function varbase_performance_init() {
+  /* Check if those modules are disabled or not, for a better performance. */
+  $modules = array(
+    '0' => 'devel',
+    '1' => 'coder',
+    '2' => 'devel_themer‎',
+    '3' => 'simpletest‎',
+    '4' => 'dblog'
+  );
+  foreach ($modules as $key => $module) {
+    if (module_exists($module)) {
+      drupal_set_message(t("It's not a good idea to keep @module running, please disable this module for a better performance!", array('@module' => $module)), 'warning');
+    }
+  }
+}
+
+include_once 'varbase_performance.features.inc';
